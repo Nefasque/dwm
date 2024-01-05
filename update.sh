@@ -7,3 +7,4 @@ sudo make clean install
 rm -rf dwm
 rm -rf config.h
 rm -f *.o 
+rm -f *.orig
