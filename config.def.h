@@ -8,18 +8,35 @@ static int topbar             = 1;        /* 0 means bottom bar */
 static char font[]            = "Fira Code Nerd Font:size=10";
 static char dmenufont[]       = "Fira Code Nerd Font:size=10";
 static const char *fonts[]          = { font };
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+
+/* color */
+static char color0[]           = "#272822";
+static char color1[]           = "#f92672";
+static char color2[]           = "#a6e22e";
+static char color3[]           = "#f4bf75";
+static char color4[]           = "#66d9ef";
+static char color5[]           = "#ae81ff";
+static char color6[]           = "#a1efe4";
+static char color7[]           = "#f8f8f2";
+
+
+static char gray1[]            = "#222222";
+static char gray2[]            = "#444444";
+static char gray3[]            = "#888888";
+static char gray4[]            = "#eeeeee";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+       [SchemeNorm] = { gray3, gray1, gray2 },
+       [SchemeSel]  = { gray4,  color1,  color1  },
 };
 
+static char *tagsel[][2] = {
+   /*   fg         bg    */
+  { gray3, color0 }, /* norm */
+  { color0, color1 }, /* sel */
+  { gray4,  color0 }, /* occ but not sel */
+  { color1,  color5 }, /* has pinned tag */
+};
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -58,7 +75,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normbordercolor, "-sb", selbgcolor, "-sf", normfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, "-nf", color1, "-sb", color0, "-sf", color1, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefox[]  = { "firefox", NULL };
 
@@ -128,12 +145,18 @@ static const Button buttons[] = {
 ResourcePref resources[] = {
 		{ "font",               STRING,  &font },
 		{ "dmenufont",          STRING,  &dmenufont },
-		{ "color1",             STRING,  &normbgcolor },
-		{ "normbordercolor",    STRING,  &normbordercolor },
-		{ "color8",             STRING,  &normfgcolor },
-		{ "color1",             STRING,  &selbgcolor },
-		{ "color2",             STRING,  &selbordercolor },
-		{ "color7",             STRING,  &selfgcolor },
+		{ "gray1",              STRING,  &gray1 },
+		{ "gray2",              STRING,  &gray2 },
+		{ "gray3",              STRING,  &gray3 },
+		{ "gray4",              STRING,  &gray4 },
+    { "color0",             STRING,  &color0 },
+		{ "color1",             STRING,  &color1 },
+    { "color2",             STRING,  &color2 },
+    { "color3",             STRING,  &color3 },
+    { "color4",             STRING,  &color4 },
+    { "color5",             STRING,  &color5 },
+    { "color6",             STRING,  &color6 },
+    { "color7",             STRING,  &color7 },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",           		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
