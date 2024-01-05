@@ -8,3 +8,4 @@ rm -rf dwm
 rm -rf config.h
 rm -f *.o 
 rm -f *.orig
+rm -f *.rej
