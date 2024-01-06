@@ -2,6 +2,7 @@
 
 /* appearance */
 static unsigned int borderpx  = 2;        /* border pixel of windows */
+static unsigned int gappx     = 5;        /* gaps between windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
@@ -82,6 +83,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, "-nf", color1, "-sb", color0, "-sf", color1, NULL };
+static const char *j4_dmenu_desktop[] = { "j4-dmenu-desktop", "-b", "-c", "-l", "10", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefox[]  = { "firefox", NULL };
 
@@ -89,7 +91,8 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 
   // app
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = j4_dmenu_desktop } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
   // open firefox
 	{ MODKEY|ShiftMask,             XK_b, spawn,          {.v = firefox } },
@@ -115,6 +118,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -163,6 +169,7 @@ ResourcePref resources[] = {
     { "color6",             STRING,  &color6 },
     { "color7",             STRING,  &color7 },
 		{ "borderpx",          	INTEGER, &borderpx },
+    { "gappx",            	INTEGER, &gappx },
 		{ "snap",           		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",           	INTEGER, &topbar },
