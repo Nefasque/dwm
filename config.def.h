@@ -83,7 +83,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, "-nf", color1, "-sb", color0, "-sf", color1, NULL };
-static const char *j4_dmenu_desktop[] = { "j4-dmenu-desktop", "-b", "-c", "-l", "10", NULL };
+static const char *j4_dmenu_desktop[] = { "j4-dmenu-desktop", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefox[]  = { "firefox", NULL };
 

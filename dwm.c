@@ -2131,7 +2131,7 @@ updatebars(void)
 		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
 		if (showsystray && m == systraytomon(m))
 			XMapRaised(dpy, systray->win);
-		XMapRaised(dpy, m->barwin);
+		XMapRaised(dpy, m->harwin);
 		XSetClassHint(dpy, m->barwin, &ch);
 	}
 }
