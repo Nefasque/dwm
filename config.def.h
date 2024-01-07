@@ -44,7 +44,8 @@ static const Block blocks[] = {
 	/* fg     command				interval	signal */
 	{ color1, "sb-clock",			60,		1},
   { color2, "sb-volume",    0,    1},
-  // { color3, "sb-kbselect",  0,    1},
+  { color3, "sb-kbselect",  0,    1},
+	{ color6, "sb-pacpackages",			177000,		1}
   // { color4, "sb-memory",    30,    1},
 	// { gray1, "sb-disk",				9000,		2},
 	// { gray2, "sb-battery",			10,		3},
@@ -53,7 +54,6 @@ static const Block blocks[] = {
 	// { "#000001", "sb-moonphase",			0,		6},
 	// { "#1F0077", "sb-forecast",			0,		7},
 	// { "#000077", "sb-volume",			0,		8},
-	{ "color6", "sb-pacpackages",			0,		9},
 	// { "#177000", "sb-sync",				0,		10},
   // { gray1, "sb-mpc",				0,		26},
 	// { gray2, "sb-music",			0,		11},
