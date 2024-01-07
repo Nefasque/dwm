@@ -1,0 +1,44 @@
+From 0aea8051b1ae85c568dc69d4cf9865de9ad6acce Mon Sep 17 00:00:00 2001
+From: Michal Orman <michal.orman@gmail.com>
+Date: Wed, 22 Mar 2023 16:02:45 +0100
+Subject: [PATCH] Make XK_0 a regular tag.
+
+Change the default behavior of XK_0 from selecting all tags to be
+a regular 10th tag.
+---
+ config.def.h | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 9efa774..15d02d7 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
+ };
+ 
+ /* tagging */
+-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
++static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+ 
+ static const Rule rules[] = {
+ 	/* xprop(1):
+@@ -79,8 +79,6 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+ 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+ 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+@@ -94,6 +92,7 @@ static const Key keys[] = {
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
++	TAGKEYS(                        XK_0,                      9)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+ };
+ 
+-- 
+2.40.0
+
