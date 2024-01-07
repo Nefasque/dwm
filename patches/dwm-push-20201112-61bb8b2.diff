@@ -1,11 +1,20 @@
+From b2faf234f21e61327ded730024db37bb36635e30 Mon Sep 17 00:00:00 2001
+From: Alex Cole <ajzcole@airmail.cc>
+Date: Thu, 12 Nov 2020 17:36:52 +1300
+Subject: [PATCH] Push patch added
+
+---
+ dwm.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
+
 diff --git a/dwm.c b/dwm.c
-index e5efb6a..660a8ac 100644
+index 664c527..039ab00 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -186,7 +186,10 @@ static void motionnotify(XEvent *e);
  static void movemouse(const Arg *arg);
  static Client *nexttiled(Client *c);
- static void pop(Client *c);
+ static void pop(Client *);
 +static Client *prevtiled(Client *c);
  static void propertynotify(XEvent *e);
 +static void pushdown(const Arg *arg);
@@ -30,7 +39,7 @@ index e5efb6a..660a8ac 100644
  void
  propertynotify(XEvent *e)
  {
-@@ -1246,6 +1259,37 @@ propertynotify(XEvent *e)
+@@ -1246,6 +1259,49 @@ propertynotify(XEvent *e)
  	}
  }
  
@@ -38,12 +47,15 @@ index e5efb6a..660a8ac 100644
 +pushdown(const Arg *arg) {
 +	Client *sel = selmon->sel, *c;
 +
-+	if(!sel || sel->isfloating || sel == nexttiled(selmon->clients))
++	if(!sel || sel->isfloating)
 +		return;
 +	if((c = nexttiled(sel->next))) {
 +		detach(sel);
 +		sel->next = c->next;
 +		c->next = sel;
++	} else {
++		detach(sel);
++		attach(sel);
 +	}
 +	focus(sel);
 +	arrange(selmon);
@@ -55,10 +67,19 @@ index e5efb6a..660a8ac 100644
 +
 +	if(!sel || sel->isfloating)
 +		return;
-+	if((c = prevtiled(sel)) && c != nexttiled(selmon->clients)) {
++	if((c = prevtiled(sel))) {
 +		detach(sel);
 +		sel->next = c;
-+		for(c = selmon->clients; c->next != sel->next; c = c->next);
++		if(selmon->clients == c)
++			selmon->clients = sel;
++		else {
++			for(c = selmon->clients; c->next != sel->next; c = c->next);
++			c->next = sel;
++		}
++	} else {
++		for(c = sel; c->next; c = c->next);
++		detach(sel);
++		sel->next = NULL;
 +		c->next = sel;
 +	}
 +	focus(sel);
@@ -68,3 +89,6 @@ index e5efb6a..660a8ac 100644
  void
  quit(const Arg *arg)
  {
+-- 
+2.29.2
+
