@@ -33,9 +33,9 @@ static char gray3[]            = "#888888";
 static char gray4[]            = "#eeeeee";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { gray3, gray1, gray2 },
-       [SchemeSel]  = { gray4,  color1,  color1  },
-       [SchemeStatus]={ gray4, gray1,  NULL  },
+       [SchemeNorm] = { gray3, color0, gray2 },
+       [SchemeSel]  = { gray4, color0, color1  },
+       [SchemeStatus]={ gray4, color0, NULL  },
 };
 
 
@@ -81,7 +81,7 @@ static char *tagsel[][2] = {
   { color1,  color5 }, /* has pinned tag */
 };
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
+static const char *tags[] = { "󰆍", "", "", "󰭹", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -101,8 +101,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "  ",      tile },    /* first entry is default */
+	{ "  ",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
