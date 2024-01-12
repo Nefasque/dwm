@@ -45,9 +45,9 @@ static const Block blocks[] = {
 	{ color1, "sb-clock",			60,		1},
   { color2, "sb-volume",    0,    1},
   { color3, "sb-kbselect",  0,    1},
-	{ color6, "sb-pacpackages",			177000,		1}
+	{ color4, "sb-disk", 			9000,	1},
+	{ color6, "sb-pacpackages",			177000,		1},
   // { color4, "sb-memory",    30,    1},
-	// { gray1, "sb-disk",				9000,		2},
 	// { gray2, "sb-battery",			10,		3},
 	// { gray3, "sb-internet",			10,		4},
 	// { cyan, "sb-mailbox",			0,		5},
