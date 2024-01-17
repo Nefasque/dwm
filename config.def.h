@@ -1,20 +1,30 @@
 /* See LICENSE file for copyright10 and license details. */
 
 /* appearance */
-static unsigned int borderpx  = 2;        /* border pixel of windows */
-static unsigned int gappx     = 3;        /* gaps between windows */
+static unsigned int borderpx  = 2;        /* border pixel of windows */ 
+static unsigned int gappx     = 4;        /* gaps between windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static char font[]            = "Fira Code Nerd Font:size=10";
 static char dmenufont[]       = "Fira Code Nerd Font:size=10";
-static const char *fonts[]          = { font };
+static const char *fonts[]    = { font };
 
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
+/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 0;
+
+/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayonleft = 0;
+
+/* systray spacing */
+static const unsigned int systrayspacing = 2;
+
+/* 1: if pinning fails, display systray on the 
+ * first monitor, False: display systray on the last monitor*/
+static const int systraypinningfailfirst = 1;
+
+/* 0 means no systray */
+static const int showsystray        = 1;
 
 
 /* color */
@@ -33,9 +43,9 @@ static char gray3[]            = "#888888";
 static char gray4[]            = "#eeeeee";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { gray3, color0, gray2 },
-       [SchemeSel]  = { gray4, color0, color1  },
-       [SchemeStatus]={ gray4, color0, NULL  },
+       [SchemeNorm] = { gray3, gray1, gray2 },
+       [SchemeSel]  = { gray4, gray1, color1  },
+       [SchemeStatus]={ gray4, gray1, NULL  },
 };
 
 
@@ -45,8 +55,9 @@ static const Block blocks[] = {
 	{ color1, "sb-clock",			60,		1},
   { color2, "sb-volume",    0,    1},
   { color3, "sb-kbselect",  0,    1},
-	{ color4, "sb-disk", 			9000,	1},
+	{ color4, "sb-disk", 			0,  	1},
 	{ color6, "sb-pacpackages",			177000,		1},
+  { color1, "sb-space",     0,    0 },
   // { color4, "sb-memory",    30,    1},
 	// { gray2, "sb-battery",			10,		3},
 	// { gray3, "sb-internet",			10,		4},
@@ -69,16 +80,12 @@ static char delimiter[] = " ";
 /* max number of character that one block command can output */
 #define CMDLENGTH	50
 
-
-
-
-
 static char *tagsel[][2] = {
    /*   fg         bg    */
-  { gray3, color0 }, /* norm */
+  { gray3, gray1 }, /* norm */
   { color0, color1 }, /* sel */
-  { gray4,  color0 }, /* occ but not sel */
-  { color1,  color5 }, /* has pinned tag */
+  { color1,  gray1 }, /* occ but not sel */
+  { color1,  gray1 }, /* has pinned tag */
 };
 /* tagging */
 static const char *tags[] = { "󰆍", "", "", "󰭹", "", "", "", "", "", "" };
@@ -122,16 +129,15 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, 
 static const char *j4_dmenu_desktop[] = { "j4-dmenu-desktop", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *firefox[]  = { "firefox", NULL };
+static const char *screenshot[] = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-
-  // app
 	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = j4_dmenu_desktop } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-  // open firefox
-	{ MODKEY|ShiftMask,             XK_b, spawn,          {.v = firefox } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = firefox } },
+  { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -182,7 +188,6 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button4,        sendstatusbar,   {.i = 4 } },
 	{ ClkStatusText,        0,              Button5,        sendstatusbar,   {.i = 5 } },
 	{ ClkStatusText,        ShiftMask,      Button1,        sendstatusbar,   {.i = 6 } },
-
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
@@ -219,6 +224,3 @@ ResourcePref resources[] = {
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "mfact",          	 	FLOAT,   &mfact },
 };
-
-
-

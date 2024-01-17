@@ -1,11 +1,24 @@
-cd /home/nefasque/workspace/dwm-6.4/
+read -p "you want to build ? [Y/n] :" ans
+ans=${ans,,}
 
-sudo make uninstall
-sudo make clean install
+if [ "$ans" == "y" ] || [ "$ans" = "" ] ; then
+  sudo make uninstall
+  sudo make clean install
+fi
+
+
+
+read -p "you want remove file of build ? [Y/n] :" ans
+ans=${ans,,}
+
+if [ "$ans" == "y" ] || [ "$ans" = "" ] ; then
+  rm -vrf dwm
+  rm -vrf config.h
+  rm -vf *.o 
+  rm -vf *.orig
+  rm -vf *.rej
+  echo "done"
+  exit
+fi
 
 # remove all the stuff we don't need
-rm -rf dwm
-rm -rf config.h
-rm -f *.o 
-rm -f *.orig
-rm -f *.rej
