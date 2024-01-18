@@ -6,8 +6,8 @@ static unsigned int gappx     = 4;        /* gaps between windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char font[]            = "Fira Code Nerd Font:size=10";
-static char dmenufont[]       = "Fira Code Nerd Font:size=10";
+static char font[]            = "monospace:pixelsize=18:antialias=true:autohint=true";
+static char dmenufont[]       = "monospace:pixelsize=18:antialias=true:autohint=true";
 static const char *fonts[]    = { font };
 
 /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -123,6 +123,8 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
+static const int dmenudesktop = 1; /* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, "-nf", color1, "-sb", color0, "-sf", color1, NULL };

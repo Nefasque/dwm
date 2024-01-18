@@ -2224,6 +2224,12 @@ sigchld(int unused)
 void
 spawn(const Arg *arg)
 {
+  if (arg->v == dmenucmd)
+    if (dmenudesktop)
+      dmenucmd[0] = "dmenu_run_desktop";
+
+  // dmenumon[0] = '0' + selmon->num;
+
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));

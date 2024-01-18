@@ -1,0 +1,40 @@
+From 72ec0ec3c504ba348db9f6e8218d2a5d3cc6812a Mon Sep 17 00:00:00 2001
+From: Maxim Mihaylin <slimbox.sdb@gmail.com>
+Date: Sun, 6 Aug 2023 12:12:15 +0600
+Subject: [PATCH] Patch for dmenu-desktoponly
+
+---
+ config.def.h | 2 ++
+ dwm.c        | 3 +++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index 9efa774..1062702 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -55,6 +55,8 @@ static const Layout layouts[] = {
+ /* helper for spawning shell commands in the pre dwm-5.0 fashion */
+ #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+ 
++static const int dmenudesktop = 1; /* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
++
+ /* commands */
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+diff --git a/dwm.c b/dwm.c
+index f1d86b2..949badd 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -1650,6 +1650,9 @@ spawn(const Arg *arg)
+ 	struct sigaction sa;
+ 
+ 	if (arg->v == dmenucmd)
++    if (dmenudesktop)
++     dmenucmd[0] = "dmenu_run_desktop";
++
+ 		dmenumon[0] = '0' + selmon->num;
+ 	if (fork() == 0) {
+ 		if (dpy)
+-- 
+2.40.1
+
