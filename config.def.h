@@ -82,8 +82,8 @@ static char delimiter[] = " ";
 
 static char *tagsel[][2] = {
    /*   fg         bg    */
-  { gray3, gray1 }, /* norm */
-  { color0, color1 }, /* sel */
+  { gray3,   gray1 }, /* norm */
+  { color0,  color1 }, /* sel */
   { color1,  gray1 }, /* occ but not sel */
   { color1,  gray1 }, /* has pinned tag */
 };
@@ -96,8 +96,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",         NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",      NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Pavucontrol",  NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -127,17 +128,21 @@ static const Layout layouts[] = {
 static const int dmenudesktop = 1; /* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", color0, "-nf", color1, "-sb", color0, "-sf", color1, NULL };
-static const char *j4_dmenu_desktop[] = { "j4-dmenu-desktop", NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *firefox[]  = { "firefox", NULL };
+static const char *dmenucmd[]   = { "dmenu_run", NULL };
+static const char *dmenu_run[]  = { "dmenu-run", NULL };
+static const char *dmenu_drun[] = { "dmenu-drun", NULL };
+static const char *clip_menu[]  = { "clip_Menu", NULL };
+static const char *termcmd[]    = { "st", NULL };
+static const char *firefox[]    = { "firefox", NULL };
 static const char *screenshot[] = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_d,      spawn,          {.v = j4_dmenu_desktop } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
+  { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenu_run } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenu_drun } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+  { MODKEY,                       XK_c,      spawn,          {.v = clip_menu } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = firefox } },
   { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
