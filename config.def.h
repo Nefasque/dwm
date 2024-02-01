@@ -125,24 +125,29 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-static const int dmenudesktop = 1; /* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
+/* 1 means dmenu will use only desktop files from [/usr/share/applications/] */
+static const int dmenudesktop = 1; 
 
 /* commands */
-static const char *dmenucmd[]   = { "dmenu_run", NULL };
-static const char *dmenu_run[]  = { "dmenu-run", NULL };
-static const char *dmenu_drun[] = { "dmenu-drun", NULL };
-static const char *clip_menu[]  = { "clip_Menu", NULL };
-static const char *termcmd[]    = { "st", NULL };
-static const char *firefox[]    = { "firefox", NULL };
-static const char *screenshot[] = { "screenshot", NULL };
+static const char *dmenucmd[]         = { "dmenu_run", NULL };
+static const char *dmenu_drun[]       = { "dmenu-drun", NULL };
+static const char *dmenu_clipmenu[]   = { "dmenu-clipmenu", NULL };
+static const char *dmenu_translate[]  = { "dmenu-translate", NULL };
+static const char *dmenu_websearch[]  = { "dmenu-websearch", NULL };
+static const char *dmenu_todo[]       = { "dmenu-todo", NULL };
+static const char *termcmd[]          = { "st", NULL };
+static const char *firefox[]          = { "firefox", NULL };
+static const char *screenshot[]       = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
-  { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = dmenu_run } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenu_drun } },
+  { MODKEY,                       XK_c,      spawn,          {.v = dmenu_clipmenu } },
+  { MODKEY,                       XK_t,      spawn,          {.v = dmenu_translate } },
+  { MODKEY,                       XK_s,      spawn,          {.v = dmenu_websearch } },
+  { MODKEY,                       XK_n,      spawn,          {.v = dmenu_todo } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-  { MODKEY,                       XK_c,      spawn,          {.v = clip_menu } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = firefox } },
   { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
