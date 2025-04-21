@@ -43,9 +43,9 @@ static char gray3[]            = "#888888";
 static char gray4[]            = "#eeeeee";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { gray3, gray1, gray2 },
-       [SchemeSel]  = { gray4, gray1, color1  },
-       [SchemeStatus]={ gray4, gray1, NULL  },
+       [SchemeNorm] = { gray3, color0, gray2 },
+       [SchemeSel]  = { gray4, color0, color1  },
+       [SchemeStatus]={ gray4, color0, NULL  },
 };
 
 
@@ -53,11 +53,11 @@ static char *colors[][3] = {
 static const Block blocks[] = {
 	/* fg     command				interval	signal */
 	{ color1, "sb-clock",			60,		1},
-  { color2, "sb-volume",    0,    1},
-  { color3, "sb-kbselect",  0,    1},
+  	{ color2, "sb-volume",    0,    1},
+  	{ color3, "sb-kbselect",  0,    1},
 	{ color4, "sb-disk", 			0,  	1},
 	{ color6, "sb-pacpackages",			177000,		1},
-  { color1, "sb-space",     0,    0 },
+  	{ color1, "sb-space",     0,    0 },
   // { color4, "sb-memory",    30,    1},
 	// { gray2, "sb-battery",			10,		3},
 	// { gray3, "sb-internet",			10,		4},
@@ -82,10 +82,10 @@ static char delimiter[] = " ";
 
 static char *tagsel[][2] = {
    /*   fg         bg    */
-  { gray3,   gray1 }, /* norm */
+  { gray3,   color0 }, /* norm */
   { color0,  color1 }, /* sel */
-  { color1,  gray1 }, /* occ but not sel */
-  { color1,  gray1 }, /* has pinned tag */
+  { color1,  color0 }, /* occ but not sel */
+  { color1,  color0 }, /* has pinned tag */
 };
 /* tagging */
 static const char *tags[] = { "󰆍", "", "", "󰭹", "", "", "", "", "", "" };
@@ -129,26 +129,26 @@ static const Layout layouts[] = {
 static const int dmenudesktop = 1; 
 
 /* commands */
-static const char *dmenucmd[]         = { "dmenu_run", NULL };
+static const char *dmenu_run[]        = { "dmenu_run", NULL };
 static const char *dmenu_drun[]       = { "dmenu-drun", NULL };
 static const char *dmenu_clipmenu[]   = { "dmenu-clipmenu", NULL };
 static const char *dmenu_translate[]  = { "dmenu-translate", NULL };
 static const char *dmenu_websearch[]  = { "dmenu-websearch", NULL };
 static const char *dmenu_todo[]       = { "dmenu-todo", NULL };
 static const char *termcmd[]          = { "st", NULL };
-static const char *firefox[]          = { "firefox", NULL };
+static const char *webbrowser[]          = { "brave", NULL };
 static const char *screenshot[]       = { "screenshot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenu_run } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenu_drun } },
   { MODKEY,                       XK_c,      spawn,          {.v = dmenu_clipmenu } },
   { MODKEY,                       XK_t,      spawn,          {.v = dmenu_translate } },
   { MODKEY,                       XK_s,      spawn,          {.v = dmenu_websearch } },
   { MODKEY,                       XK_n,      spawn,          {.v = dmenu_todo } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = firefox } },
+	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = webbrowser } },
   { MODKEY,                       XK_Print,  spawn,          {.v = screenshot } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -219,17 +219,17 @@ ResourcePref resources[] = {
 		{ "gray2",              STRING,  &gray2 },
 		{ "gray3",              STRING,  &gray3 },
 		{ "gray4",              STRING,  &gray4 },
-    { "color0",             STRING,  &color0 },
+    		{ "color0",             STRING,  &color0 },
 		{ "color1",             STRING,  &color1 },
-    { "color2",             STRING,  &color2 },
-    { "color3",             STRING,  &color3 },
-    { "color4",             STRING,  &color4 },
-    { "color5",             STRING,  &color5 },
-    { "color6",             STRING,  &color6 },
-    { "color7",             STRING,  &color7 },
+    		{ "color2",             STRING,  &color2 },
+    		{ "color3",             STRING,  &color3 },
+    		{ "color4",             STRING,  &color4 },
+    		{ "color5",             STRING,  &color5 },
+	    	{ "color6",             STRING,  &color6 },
+    		{ "color7",             STRING,  &color7 },
 		{ "borderpx",          	INTEGER, &borderpx },
-    { "gappx",            	INTEGER, &gappx },
-		{ "snap",           		INTEGER, &snap },
+    		{ "gappx",            	INTEGER, &gappx },
+		{ "snap",           	INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",           	INTEGER, &topbar },
 		{ "nmaster",          	INTEGER, &nmaster },

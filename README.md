@@ -17,7 +17,7 @@ Afterwards enter the following command to build and install dwm (if
 necessary as root):
 
 
-    make clean install
+    sudo ./update.sh
 
 
 Running dwm
@@ -45,5 +45,5 @@ like this in your .xinitrc:
 
 Configuration
 -------------
-The configuration of dwm is done by creating a custom config.h
+The configuration of dwm is done by creating a custom config.def.h
 and (re)compiling the source code.
